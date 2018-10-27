@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -20,14 +21,22 @@ public partial class Manager_NewMeeting : System.Web.UI.Page
       }
     }
   }
-
-  protected void Validate_Time(object sender, ServerValidateEventArgs e)
+  protected DateTime GetTime(string inputDatetime)
   {
-    string[] datetime = e.Value.Split(' ');
+    if (inputDatetime == "") {
+      return new DateTime();
+    }
+    string[] datetime = inputDatetime.Split(' ');
     string[] date = datetime[0].Split('/');
     string[] time = datetime[1].Split(':');
 
     DateTime customDate = new DateTime(int.Parse(date[2]), int.Parse(date[1]), int.Parse(date[0]), int.Parse(time[0]), int.Parse(time[1]), 0);
+    return customDate;
+  }
+
+  protected void Validate_Time(object sender, ServerValidateEventArgs e)
+  {
+    DateTime customDate = GetTime(e.Value);
     if (DateTime.TryParse(customDate.ToString(), out DateTime result))
     {
       e.IsValid = true;
@@ -40,11 +49,7 @@ public partial class Manager_NewMeeting : System.Web.UI.Page
 
   protected Boolean CustomTime_Validate(string inputDatetime)
   {
-    string[] datetime = inputDatetime.Split(' ');
-    string[] date = datetime[0].Split('/');
-    string[] time = datetime[1].Split(':');
-
-    DateTime customDate = new DateTime(int.Parse(date[2]), int.Parse(date[1]), int.Parse(date[0]), int.Parse(time[0]), int.Parse(time[1]), 0);
+    DateTime customDate = GetTime(inputDatetime);
     if (DateTime.TryParse(customDate.ToString(), out DateTime result))
     {
       return true;
@@ -57,27 +62,18 @@ public partial class Manager_NewMeeting : System.Web.UI.Page
 
   protected void Select_Rooms(object sender, EventArgs e)
   {
-    Boolean valid = true;
-
-    if (CustomTime_Validate(StartTime.Text))
+    if (StartTime.Text != "" && CustomTime_Validate(StartTime.Text))
     {
-      if (CustomTime_Validate(EndTime.Text))
+      if (EndTime.Text != "" && CustomTime_Validate(EndTime.Text))
       {
         int buildingId = int.Parse(Building.SelectedValue);
+        DateTime startTime = GetTime(StartTime.Text);
+        DateTime endTime = GetTime(EndTime.Text);
 
-        string[] datetime = StartTime.Text.Split(' ');
-        string[] date = datetime[0].Split('/');
-        string[] time = datetime[1].Split(':');
-
-        DateTime startTime = new DateTime(int.Parse(date[2]), int.Parse(date[1]), int.Parse(date[0]), int.Parse(time[0]), int.Parse(time[1]), 0);
-
-        datetime = EndTime.Text.Split(' ');
-        date = datetime[0].Split('/');
-        time = datetime[1].Split(':');
-
-        DateTime endTime = new DateTime(int.Parse(date[2]), int.Parse(date[1]), int.Parse(date[0]), int.Parse(time[0]), int.Parse(time[1]), 0);
-
-        //get rooms
+        List<Room> result = RoomData.GetAvailableRooms(startTime, endTime, buildingId);
+        for (int it = 0; it < result.Count; it++) {
+          Room.Items.Insert(it, new ListItem(result[it].Name, result[it].Id.ToString()));
+        }
       }
       else
       {
@@ -92,6 +88,25 @@ public partial class Manager_NewMeeting : System.Web.UI.Page
 
   protected void CreateMeeting_Click(object sender, EventArgs e)
   {
+    if (Page.IsValid)
+    {
+      Meeting newMeeting = new Meeting();
 
+      newMeeting.ManagerId = User.Identity.GetUserId();
+      newMeeting.RoomId = int.Parse(Room.SelectedValue);
+      newMeeting.StartTime = GetTime(StartTime.Text);
+      newMeeting.EndTime = GetTime(EndTime.Text);
+      newMeeting.Name = Name.Text;
+      newMeeting.Description = Description.Text;
+
+      int newMeetingId = MeetingData.InsertMeeting(newMeeting);
+      if (newMeetingId != 0)
+      {
+        SuccessMessage.Text = "Created new meeting.";
+      }
+      else {
+        ErrorMessage.Text = "Couldn't create new meeting. Try again.";
+      }
+    }
   }
 }

@@ -4,6 +4,9 @@
   <p class="text-danger">
     <asp:Literal runat="server" ID="ErrorMessage" />
   </p>
+  <p class="text-success">
+    <asp:Literal runat="server" ID="SuccessMessage" />
+  </p>
 
   <div class="form-horizontal">
     <h4>Create a new meeting.</h4>
@@ -37,11 +40,11 @@
       </div>
     </div>
     <div class="form-group" runat="server">
-      <asp:Label runat="server" AssociatedControlID="Rooms" CssClass="col-md-2 control-label">Rooms</asp:Label>
+      <asp:Label runat="server" AssociatedControlID="Room" CssClass="col-md-2 control-label">Room</asp:Label>
       <div class="col-md-10">
-        <asp:DropDownList ID="Rooms" runat="server">
+        <asp:DropDownList ID="Room" runat="server">
         </asp:DropDownList>
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="Building"
+        <asp:RequiredFieldValidator runat="server" ControlToValidate="Room"
           CssClass="text-danger" ErrorMessage="You must select a room." />
       </div>
     </div>

@@ -43,7 +43,7 @@ public class RoomData
         return rooms;
     }
 
-    public static List<Room> GetAvailableRooms(DateTime StartTime, DateTime EndTime)
+    public static List<Room> GetAvailableRooms(DateTime StartTime, DateTime EndTime, int BuildingId)
     {
         List<Room> rooms = new List<Room>();
 
@@ -55,8 +55,9 @@ public class RoomData
             SqlCommand cmd = new SqlCommand("spGetAvailableRooms", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             
-            cmd.Parameters.Add(new SqlParameter("@pmId", StartTime));
-            cmd.Parameters.Add(new SqlParameter("@pmBuildingId", EndTime));
+            cmd.Parameters.Add(new SqlParameter("@pmStartTime", StartTime));
+            cmd.Parameters.Add(new SqlParameter("@pmEndTime", EndTime));
+            cmd.Parameters.Add(new SqlParameter("@pmBuildingId", BuildingId));
 
             using (SqlDataReader reader = cmd.ExecuteReader())
             {

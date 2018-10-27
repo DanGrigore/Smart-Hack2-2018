@@ -13,25 +13,9 @@ public partial class Manager_NewMeeting : System.Web.UI.Page
   {
     if (!Page.IsPostBack)
     {
-      string query = "" +
-        "select * " +
-        "from Buildings;";
-
-      SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-      connection.Open();
-      try
-      {
-        SqlCommand statement = new SqlCommand(query, connection);
-        SqlDataReader result = statement.ExecuteReader();
-
-        while (result.Read()) {
-          Building.Items.Insert(Building.Items.Count, new ListItem(result["Name"].ToString(), result["Id"].ToString()));
-        }
-      }
-      catch (Exception exc) {
-        ErrorMessage.Text = "Error: " + exc.Message;
-      } finally {
-        connection.Close();
+      List <Building> result = BuildingData.GetAllBuildingsForCompany(1);
+      for (int it = 0; it < result.Count; it++) {
+        Building.Items.Insert(it, new ListItem(result[it].Name, result[it].Id.ToString()));
       }
     }
   }

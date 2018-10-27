@@ -11,6 +11,36 @@ body {
     padding-right: 15px;
 }
 
+#slideshow-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .75);
+}
+
+#slideshow-container #company-name {
+  position: absolute;
+  font-size: 50px;
+  color: white;
+ }
+
+#slideshow-container .slideshow {
+  width: 100%;
+  display: block;
+  z-index: -1;
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+
+#slideshow-container .hidden {
+  opacity: 0;
+  display: block!important;
+  position: absolute;
+  transform: translate(9999px);
+}
+
+
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,

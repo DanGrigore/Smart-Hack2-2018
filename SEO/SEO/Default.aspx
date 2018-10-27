@@ -4,7 +4,28 @@
 
   <asp:LoginView runat="server">
     <AnonymousTemplate>
-      <h1>Slide show</h1>
+      <div id="slideshow-container">
+        <span id="company-name">SEO</span>
+        <img class="slideshow" src="/images/img1.jpg" alt="" />
+        <img class="slideshow hidden" src="/images/img2.jpg" alt="" />
+        <img class="slideshow hidden" src="/images/img3.jpg" alt="" />
+        <script>
+          let slideshow = document.getElementById("slideshow");
+          let images = document.querySelectorAll("#slideshow-container .slideshow");
+          let currentImage = 0;
+
+          setInterval(function () {
+            if (++currentImage < images.length) {
+              images[currentImage - 1].className = "slideshow hidden";
+              images[currentImage].className = "slideshow";
+            } else {
+              currentImage = 0;
+              images[images.length - 1].className = "slideshow hidden";
+              images[currentImage].className = "slideshow";
+            }
+          }, 5000);
+        </script>
+      </div>
     </AnonymousTemplate>
     <LoggedInTemplate>
       <h1>Calendar</h1>
@@ -14,9 +35,10 @@
         <ContentTemplate>
           <a runat="server" href="~/Manager/NewMeeting">Create new meeting</a>
           <h1>Calendar</h1>
+          <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
         </ContentTemplate>
       </asp:RoleGroup>
     </RoleGroups>
-  </asp:LoginView>  
+  </asp:LoginView>
 
 </asp:Content>

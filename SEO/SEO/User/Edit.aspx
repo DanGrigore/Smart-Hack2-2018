@@ -9,7 +9,10 @@
     </p>
 
     <div class="form-horizontal">
-        <h4>Edit information</h4>
+        <h3>Edit information</h3>
+        <p>
+            <a href="/Account/Manage" title="Change your password">Change password</a>
+        </p>
         <hr />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
         <div class="form-group" runat="server">

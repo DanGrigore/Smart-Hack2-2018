@@ -1,0 +1,29 @@
+﻿#tableMap {
+    border: 2px solid black;
+    width: 500px;
+    height: 500px;
+}
+
+.trMap{
+    border: 2px solid black;
+    width: 10%;
+    height: 6%;
+}
+
+.reserved {
+    background-color: red;
+}
+
+.free {
+    background-color: green;
+}
+
+.empty {
+    background-color: white;
+}
+
+.emptyLine {
+    height: 5%;
+    border-left: none;
+    border-right: none;
+}

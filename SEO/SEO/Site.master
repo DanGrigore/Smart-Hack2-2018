@@ -14,7 +14,7 @@
   <webopt:BundleReference runat="server" Path="~/Content/css" />
   <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
   <link href="/Content/Site.css" rel="stylesheet" type="html/sandboxed" />
-
+  <link href="/Content/Table.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
   <form runat="server">

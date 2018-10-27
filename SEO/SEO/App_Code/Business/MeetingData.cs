@@ -83,8 +83,7 @@ public class MeetingData
 
             SqlCommand cmd = new SqlCommand("spInsertMeeting", conn);
             cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.Add(new SqlParameter("@pmId", meeting.Id));
+            
             cmd.Parameters.Add(new SqlParameter("@pmManagerId", meeting.ManagerId));
             cmd.Parameters.Add(new SqlParameter("@pmRoomId", meeting.RoomId));
             cmd.Parameters.Add(new SqlParameter("@pmStartTime", meeting.StartTime));

@@ -12,7 +12,8 @@ public partial class User_Edit : System.Web.UI.Page
 {
   protected void Page_Load(object sender, EventArgs e)
   {
-    if (!Page.IsPostBack) {
+    if (!Page.IsPostBack)
+    {
       string userId = User.Identity.GetUserId();
       string query = "" +
         "select * " +
@@ -34,11 +35,13 @@ public partial class User_Edit : System.Web.UI.Page
           Email.Text = result["Email"].ToString();
           PhoneNumber.Text = result["PhoneNumber"].ToString();
         }
-        else {
+        else
+        {
           ErrorMessage.Text = "No data.";
         }
       }
-      catch (Exception exc) {
+      catch (Exception exc)
+      {
         ErrorMessage.Text = "Error: " + exc.Message;
       }
     }

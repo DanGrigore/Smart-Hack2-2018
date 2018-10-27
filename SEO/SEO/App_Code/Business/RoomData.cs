@@ -55,12 +55,9 @@ public class RoomData
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.Add(new SqlParameter("@pmId", room.Id));
-            cmd.Parameters.Add(new SqlParameter("@pmManagerId", room.ManagerId));
-            cmd.Parameters.Add(new SqlParameter("@pmRoomId", room.RoomId));
-            cmd.Parameters.Add(new SqlParameter("@pmStartTime", room.StartTime));
-            cmd.Parameters.Add(new SqlParameter("@pmEndTime", room.EndTime));
+            cmd.Parameters.Add(new SqlParameter("@pmBuildingId", room.BuildingId));
+            cmd.Parameters.Add(new SqlParameter("@pmFloor", room.Floor));
             cmd.Parameters.Add(new SqlParameter("@pmName", room.Name));
-            cmd.Parameters.Add(new SqlParameter("@pmDescription", room.Description));
 
             int noRows = cmd.ExecuteNonQuery();
             result = (noRows == 0) ? false : true;

@@ -4,6 +4,9 @@
   <p class="text-danger">
     <asp:Literal runat="server" ID="ErrorMessage" />
   </p>
+  <p class="text-success">
+    <asp:Literal runat="server" ID="SuccessMessage" />
+  </p>
 
   <div class="form-horizontal">
     <h4>Create a new meeting.</h4>
@@ -24,6 +27,7 @@
         <asp:TextBox ID="StartTime" runat="server" AutoPostBack="true" OnSelectedIndexChanged="Select_Rooms"></asp:TextBox>
         <asp:RequiredFieldValidator runat="server" ControlToValidate="StartTime"
           CssClass="text-danger" ErrorMessage="The start time field can't be empty." />
+        <asp:CustomValidator runat="server" ID="TimeValidator1" ControlToValidate="StartTime" OnServerValidate="Validate_Time" ErrorMessage="Start time must be dd/mm/yyyy hh:mm" />
       </div>
     </div>
     <div class="form-group" runat="server">
@@ -32,14 +36,15 @@
         <asp:TextBox ID="EndTime" runat="server" AutoPostBack="true" OnSelectedIndexChanged="Select_Rooms"></asp:TextBox>
         <asp:RequiredFieldValidator runat="server" ControlToValidate="EndTime"
           CssClass="text-danger" ErrorMessage="The end time field can't be empty." />
+        <asp:CustomValidator runat="server" ID="TimeValidator2" ControlToValidate="EndTime" OnServerValidate="Validate_Time" ErrorMessage="End time must be dd/mm/yyyy hh:mm" />
       </div>
     </div>
     <div class="form-group" runat="server">
-      <asp:Label runat="server" AssociatedControlID="Rooms" CssClass="col-md-2 control-label">Rooms</asp:Label>
+      <asp:Label runat="server" AssociatedControlID="Room" CssClass="col-md-2 control-label">Room</asp:Label>
       <div class="col-md-10">
-        <asp:DropDownList ID="Rooms" runat="server">
+        <asp:DropDownList ID="Room" runat="server">
         </asp:DropDownList>
-        <asp:RequiredFieldValidator runat="server" ControlToValidate="Building"
+        <asp:RequiredFieldValidator runat="server" ControlToValidate="Room"
           CssClass="text-danger" ErrorMessage="You must select a room." />
       </div>
     </div>
@@ -57,6 +62,11 @@
         <asp:TextBox ID="Description" runat="server"></asp:TextBox>
         <asp:RequiredFieldValidator runat="server" ControlToValidate="Description"
           CssClass="text-danger" ErrorMessage="The description field can't be empty." />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+        <asp:Button runat="server" OnClick="CreateMeeting_Click" Text="Create" CssClass="btn btn-default" />
       </div>
     </div>
   </div>

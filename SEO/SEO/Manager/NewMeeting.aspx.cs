@@ -20,7 +20,28 @@ public partial class Manager_NewMeeting : System.Web.UI.Page
     }
   }
 
+  protected void Validate_Time(object sender, ServerValidateEventArgs e)
+  {
+    string[] datetime = e.Value.Split(' ');
+    string[] date = datetime[0].Split('/');
+    string[] time = datetime[1].Split(':');
+
+    DateTime customDate = new DateTime(int.Parse(date[2]), int.Parse(date[1]), int.Parse(date[0]), int.Parse(time[0]), int.Parse(time[1]), 0);
+    if (DateTime.TryParse(customDate.ToString(), out DateTime result))
+    {
+      e.IsValid = true;
+    }
+    else {
+      e.IsValid = false;
+    }
+  }
+
   protected void Select_Rooms(object sender, EventArgs e) {
+
+  }
+
+  protected void CreateMeeting_Click(object sender, EventArgs e)
+  {
 
   }
 }

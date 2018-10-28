@@ -71,6 +71,7 @@ public partial class Manager_NewMeeting : System.Web.UI.Page
         DateTime endTime = GetTime(EndTime.Text);
 
         List<Room> result = RoomData.GetAvailableRooms(startTime, endTime, buildingId);
+        Room.Items.Clear();
         for (int it = 0; it < result.Count; it++) {
           Room.Items.Insert(it, new ListItem(result[it].Name, result[it].Id.ToString()));
         }

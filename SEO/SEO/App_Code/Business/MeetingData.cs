@@ -33,7 +33,7 @@ public class MeetingData
                 {
                     Meeting meeting = new Meeting();
                     meeting.Id = Convert.ToInt32(reader["Id"]);
-                    meeting.ManagerId = Convert.ToInt32(reader["ManagerId"]);
+                    meeting.ManagerId = reader["ManagerId"].ToString();
                     meeting.RoomId = Convert.ToInt32(reader["RoomId"]);
                     meeting.Name = reader["Name"].ToString();
                     meeting.StartTime = Convert.ToDateTime(reader["StartTime"]);
@@ -91,7 +91,7 @@ public class MeetingData
             cmd.Parameters.Add(new SqlParameter("@pmName", meeting.Name));
             cmd.Parameters.Add(new SqlParameter("@pmDescription", meeting.Description));
 
-            newId = Convert.ToInt32(cmd.ExecuteScalar());
+            newId = int.Parse(cmd.ExecuteScalar().ToString());
             conn.Close();
         }
         return newId;

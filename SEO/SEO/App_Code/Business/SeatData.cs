@@ -16,7 +16,7 @@ public class SeatData
         {
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("'spGetSeats", conn);
+            SqlCommand cmd = new SqlCommand("spGetSeats", conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
             if (id.HasValue)

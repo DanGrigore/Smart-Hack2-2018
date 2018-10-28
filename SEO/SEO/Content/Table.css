@@ -10,6 +10,10 @@
     height: 6%;
 }
 
+.free:hover{
+    cursor:pointer;
+}
+
 .reserved {
     background-color: red;
 }

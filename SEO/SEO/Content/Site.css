@@ -11,6 +11,10 @@ body {
     padding-right: 15px;
 }
 
+.database-table td, .database-table th {
+  padding: 5px!important;
+}
+
 #slideshow-container {
   position: relative;
   display: flex;

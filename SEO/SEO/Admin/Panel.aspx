@@ -14,6 +14,7 @@
           <th runat="server">CUI</th>
           <th runat="server">Name</th>
           <th runat="server">Address</th>
+          <th runat="server">Action</th>
         </tr>
         <tr runat="server" ID="CompanyPlaceholder"></tr>
       </table>
@@ -24,6 +25,7 @@
         <td><%# Eval("Cui") %></td>      
         <td><%# Eval("Name") %></td>
         <td><%# Eval("Address") %></td>
+        <td><a href="EditCompany.aspx?id=<%# Eval("Id") %>" alt="Edit company">Edit</a></td>
       </tr>
     </ItemTemplate>
   </asp:ListView>
@@ -38,6 +40,7 @@
           <th runat="server">CompanyId</th>
           <th runat="server">Name</th>
           <th runat="server">Address</th>
+          <th runat="server">Action</th>
         </tr>
         <tr runat="server" ID="BuildingPlaceholder"></tr>
       </table>
@@ -48,6 +51,7 @@
         <td><%# Eval("CompanyId") %></td>      
         <td><%# Eval("Name") %></td>
         <td><%# Eval("Address") %></td>
+        <td><a href="EditBuilding.aspx?id=<%# Eval("Id") %>" alt="Edit building">Edit</a></td>
       </tr>
     </ItemTemplate>
   </asp:ListView>
@@ -62,6 +66,7 @@
           <th runat="server">BuildingId</th>
           <th runat="server">Name</th>
           <th runat="server">Floor</th>
+          <th runat="server">Action</th>
         </tr>
         <tr runat="server" ID="RoomPlaceholder"></tr>
       </table>
@@ -72,6 +77,7 @@
         <td><%# Eval("BuildingId") %></td>      
         <td><%# Eval("Name") %></td>
         <td><%# Eval("Floor") %></td>
+        <td><a href="EditRoom.aspx?id=<%# Eval("Id") %>" alt="Edit room">Edit</a></td>
       </tr>
     </ItemTemplate>
   </asp:ListView>
@@ -86,6 +92,7 @@
           <th runat="server">RoomId</th>
           <th runat="server">Ox</th>
           <th runat="server">Oy</th>
+          <th runat="server">Action</th>
         </tr>
         <tr runat="server" ID="SeatPlaceholder"></tr>
       </table>
@@ -96,6 +103,7 @@
         <td><%# Eval("RoomId") %></td>      
         <td><%# Eval("Ox") %></td>
         <td><%# Eval("Oy") %></td>
+        <td><a href="EditSeat.aspx?id=<%# Eval("Id") %>" alt="Edit seat">Edit</a></td>
       </tr>
     </ItemTemplate>
   </asp:ListView>
@@ -112,6 +120,7 @@
           <th runat="server">End time</th>
           <th runat="server">Name</th>
           <th runat="server">Description</th>
+          <th runat="server">Action</th>
         </tr>
         <tr runat="server" ID="MeetingPlaceholder"></tr>
       </table>
@@ -124,6 +133,7 @@
         <td><%# Eval("EndTime") %></td>  
         <td><%# Eval("Name") %></td>
         <td><%# Eval("Description") %></td>
+        <td><a href="/Manager/EditMeeting.aspx?id=<%# Eval("Id") %>" alt="Edit meeting">Edit</a></td>
       </tr>
     </ItemTemplate>
   </asp:ListView>
@@ -138,6 +148,7 @@
           <th runat="server">MeetingId</th>
           <th runat="server">SeatId</th>
           <th runat="server">Confirmed</th>
+          <th runat="server">Action</th>
         </tr>
         <tr runat="server" ID="SchedulePlaceholder"></tr>
       </table>
@@ -148,6 +159,7 @@
         <td><%# Eval("MeetingId") %></td>      
         <td><%# Eval("SeatId") %></td>
         <td><%# Eval("Confirmed") %></td>
+        <td><a href="EditSchedule.aspx?idM=<%# Eval("MeetingId") %>&idU=<%# Eval("UserId") %>" alt="Edit schedule">Edit</a></td>
       </tr>
     </ItemTemplate>
   </asp:ListView>
@@ -165,6 +177,7 @@
           <th runat="server">Password</th>
           <th runat="server">Email</th>
           <th runat="server">Phone number</th>
+          <th runat="server">Action</th>
         </tr>
         <tr runat="server" ID="UserPlaceholder"></tr>
       </table>
@@ -178,6 +191,7 @@
         <td><%# Eval("PasswordHash") %></td>
         <td><%# Eval("Email") %></td>
         <td><%# Eval("PhoneNumber") %></td>
+        <td><a href="EditUser.aspx?id=<%# Eval("Id") %>" alt="Edit user">Edit</a></td>
       </tr>
     </ItemTemplate>
   </asp:ListView>
